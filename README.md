@@ -19,3 +19,5 @@ Healthcare professional turned full-stack AI engineer. I build products that shi
 ## Get in Touch
 
 Open to contracts and full-time roles in AI engineering, full-stack development, or agentic systems.
+
+bigfoote54@gmail.com
