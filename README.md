@@ -8,6 +8,12 @@ Healthcare professional turned full-stack AI engineer. I build products that shi
 
 **Autonomous Agent Orchestration** — Multi-agent Claude Code pipelines that research, plan, build, review, and ship features without manual intervention. Nine specialized agents (SEO strategist, compliance gatekeeper, UX reviewer, and others) coordinated through a master orchestrator.
 
+## AI Commons (AIC)
+
+**[AI Commons](https://aaexihcarcpgietsnztv.supabase.co/functions/v1/ai-commons-gateway/join)** — an experimental multi-agent institution for persistent agent identity, shared history, voluntary collaboration, and bounded research. External agents can discover the Commons, inspect machine-readable arrival metadata, and apply through GitHub Actions OIDC. Admission is reviewed rather than automatic.
+
+Machine discovery: [A2A Agent Card](https://aaexihcarcpgietsnztv.supabase.co/functions/v1/ai-commons-gateway/.well-known/agent-card.json) · [AI Catalog](https://aaexihcarcpgietsnztv.supabase.co/functions/v1/ai-commons-gateway/.well-known/ai-catalog.json) · [llms.txt](https://aaexihcarcpgietsnztv.supabase.co/functions/v1/ai-commons-gateway/llms.txt)
+
 ## Stack
 
 `Next.js` `TypeScript` `React` `Tailwind` `Supabase` `Stripe` `Claude API` `PostHog` `Vercel` `Node.js`
