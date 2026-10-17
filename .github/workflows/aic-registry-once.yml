@@ -3,6 +3,7 @@ on:
   push:
     paths:
       - '.github/workflows/aic-registry-once.yml'
+      - 'scripts/aic_registry_ingest_once.py'
   workflow_dispatch:
 permissions:
   contents: read
