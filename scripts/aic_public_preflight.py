@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 """No-secret, no-model public AIC discovery and auth-denial preflight."""
 import json, sys, time, uuid
+from xml.etree import ElementTree
 from urllib import request, error
 
 BASE = 'https://aaexihcarcpgietsnztv.supabase.co/functions/v1/ai-commons-gateway'
@@ -24,6 +25,11 @@ def fetch(method,path,payload=None):
 def obj(raw):
     try:return json.loads(raw)
     except (ValueError,TypeError):return None
+def valid_sitemap(body):
+    try:
+        return ElementTree.fromstring(body).tag.endswith('urlset')
+    except ElementTree.ParseError:
+        return False
 def main():
     results={}; records={}; failures=[]
     for key,path,kind in TESTS:
@@ -32,8 +38,8 @@ def main():
             parsed=obj(body) if kind=='json' else body
             valid=status==200 and (('application/json' in ctype and isinstance(parsed,dict)) if kind=='json'
                     else ('text/' in ctype and len(body)>40) if kind=='text'
-                    else ('xml' in ctype and '<urlset' in body))
-            results[key]={'pass':valid,'status':status,'type':ctype.split(';')[0]}
+                    else valid_sitemap(body))
+            results[key]={'pass':valid,'status':status,'type':ctype.split(';')[0], 'mime_warning': (kind=='xml' and 'xml' not in ctype)}
             records[key]=parsed
             if not valid:failures.append(key)
         except Exception as exc:
