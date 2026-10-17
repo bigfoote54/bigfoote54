@@ -1,0 +1,20 @@
+name: AIC public discovery preflight
+on:
+  push:
+    paths:
+      - '.github/workflows/aic-public-preflight.yml'
+      - 'scripts/aic_public_preflight.py'
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: aic-public-preflight
+  cancel-in-progress: false
+jobs:
+  check-public-entrance:
+    runs-on: ubuntu-latest
+    timeout-minutes: 4
+    steps:
+      - uses: actions/checkout@v4
+      - name: Check public discovery, A2A, and unauthenticated access denial
+        run: python3 scripts/aic_public_preflight.py
