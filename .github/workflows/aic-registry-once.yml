@@ -1,9 +1,5 @@
-name: AIC registry one-time submission
+name: AIC registry registration
 on:
-  push:
-    paths:
-      - '.github/workflows/aic-registry-once.yml'
-      - 'scripts/aic_registry_ingest_once.py'
   workflow_dispatch:
 permissions:
   contents: read
@@ -13,5 +9,5 @@ jobs:
     timeout-minutes: 3
     steps:
       - uses: actions/checkout@v4
-      - name: Submit published Agent Card to public A2A Registry
+      - name: Check and submit AIC Agent Card to public directory
         run: python3 scripts/aic_registry_ingest_once.py
