@@ -5,7 +5,7 @@ No secrets, auth tokens, or user records. Checks registry before writing.
 import json,sys,time
 from urllib import request,error
 from urllib.parse import quote
-REGISTRY='https://api.a2a-registry.org'
+REGISTRY='https://a2aregistry.org'
 CARD='https://aaexihcarcpgietsnztv.supabase.co/functions/v1/ai-commons-gateway/.well-known/agent-card.json'
 
 def call(method,url,payload=None):
@@ -26,7 +26,7 @@ def listed(body):
     except ValueError:return False
 def main():
     result={'target_registry':REGISTRY,'manifest':CARD,'checked_at_unix':round(time.time())}
-    search=REGISTRY+'/public/agents?q='+quote('AI Commons')
+    search=REGISTRY+'/api/agents?search='+quote('AI Commons')
     try:
         pre,body=call('GET',search)
         result['before']={'status':pre,'exact_card_found':listed(body)}
@@ -36,8 +36,8 @@ def main():
         if listed(body):
             result['outcome']='already_indexed'
             print(json.dumps(result,indent=2));return 0
-        code,reply=call('POST',REGISTRY+'/public/ingest',{'manifestUrl':CARD})
-        result['ingest']={'status':code,'response_snippet':reply[:350]}
+        code,reply=call('POST',REGISTRY+'/api/agents/register',{'wellKnownURI':CARD})
+        result['ingest']={'status':code,'response_bytes':len(reply)}
         result['outcome']='submitted_pending_verification' if code in (200,201,202) else 'submission_rejected'
         post,body=call('GET',search)
         result['after']={'status':post,'exact_card_found':listed(body)}
